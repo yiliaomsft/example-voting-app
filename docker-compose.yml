@@ -1,6 +1,17 @@
 version: "3"
 
 services:
+  proxy:
+    image: yiliao/proxy:v1
+    ports:
+      - "8080:8080"
+    depends_on:
+      - "vote"
+      - "result"
+    networks:
+      - front-tier
+      - back-tier
+
   vote:
     image: yiliao/vote:v1
     command: python app.py
@@ -39,17 +50,6 @@ services:
     volumes:
       - "db-data:/var/lib/postgresql/data"
     networks:
-      - back-tier
-
-  proxy:
-    image: yiliao/proxy:v1
-    ports:
-      - "8888:8888"
-    depends_on:
-      - "vote"
-      - "result"
-    networks:
-      - front-tier
       - back-tier
 
 volumes:
