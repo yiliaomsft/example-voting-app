@@ -14,7 +14,7 @@ services:
 
   vote:
     image: yiliao/vote:v1
-    command: python app.py
+    command: ["python", "app.py"]
     volumes:
      - ./vote:/app
     networks:
@@ -22,7 +22,7 @@ services:
 
   result:
     image: yiliao/result:v1
-    command: nodemon server.js
+    command: ["nodemon", "server.js"]
     volumes:
       - ./result:/app
     ports:
