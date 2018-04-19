@@ -1,0 +1,30 @@
+on: "3"
+
+services:
+  proxy:
+    image: yiliao/proxy:v2
+    ports:
+      - "80:80"
+    depends_on:
+      - "vote"
+      - "result"
+
+  vote:
+    image: yiliao/vote:v1
+    command: ["python", "app.py"]
+
+  result:
+    image: yiliao/result:v1
+    command: ["nodemon", "server.js"]
+
+  worker:
+    image: yiliao/worker:v1
+
+  redis:
+    image: redis:alpine
+    container_name: redis
+    ports: ["6379"]
+
+  db:
+    image: postgres:9.4
+    container_name: db
