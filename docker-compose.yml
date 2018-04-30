@@ -1,35 +1,32 @@
 version: "3"
 
 services:
-  proxy:
-    image: yiliao/proxy:v2
+  vote:
+    build: ./vote
+    command: python app.py
+    volumes:
+     - ./vote:/app
     ports:
-      - "80:80"
-    depends_on:
-      - "vote"
-      - "result"
+      - "5000:80"
     networks:
       - front-tier
       - back-tier
 
-  vote:
-    image: yiliao/vote:v1
-    command: ["python", "app.py"]
-    volumes:
-     - ./vote:/app
-    networks:
-      - back-tier
-
   result:
-    image: yiliao/result:v1
-    command: ["nodemon", "server.js"]
+    build: ./result
+    command: nodemon server.js
     volumes:
       - ./result:/app
+    ports:
+      - "5001:80"
+      - "5858:5858"
     networks:
+      - front-tier
       - back-tier
 
   worker:
-    image: yiliao/worker:v1
+    build:
+      context: ./worker
     depends_on:
       - "redis"
     networks:
