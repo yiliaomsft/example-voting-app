@@ -16,7 +16,7 @@ The app will be running at [http://localhost:80](http://localhost:80), and the r
 Run the app in Azure App Service
 --------------------------------
 
-Make sure you have the latest Azure CLI installed. Follow the steps in this document [https://docs.microsoft.com/en-us/azure/app-service/containers/tutorial-custom-docker-image] (https://docs.microsoft.com/en-us/azure/app-service/containers/tutorial-custom-docker-image) to create Azure Resource Group and Linux App Service plan, please ignore the stpes for downloading the sample repo. We should be able to provide a tutorial specifically for Multi-container Web App, stay tunned. 
+Make sure you have the latest Azure CLI installed. Follow the steps in this [tutorial]https://docs.microsoft.com/en-us/azure/app-service/containers/tutorial-custom-docker-image) to create Azure Resource Group and Linux App Service plan, please ignore the stpes for downloading the sample repo. We should be able to provide a tutorial specifically for Multi-container Web App, stay tunned. 
 
 Once you have a Linux App Service plan, you can run the following CLI to create a Web App for this voting sample: 
 $ az webapp create --resource-group [resource group] --plan [service plan] --name [app name] --multicontainer-config-type "compose" --multicontainer-config-file "docker-compose-appservice.yml"
